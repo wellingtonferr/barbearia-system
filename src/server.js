@@ -37,8 +37,22 @@ app.put('/clientes/:nome', (req, res)=>{
   if (!clientes){
     return res.status(400).json({erro:'cliente não encontrado'})
   }
+
+  if(cliente.cortesGratis){
+    cliente.cortes = 0
+    cortesGratis = 0
+
+    return res.json({mensagem : 'Corte grátis utilizado!'})
+  }
+
   cliente.cortes += 1
 
-  if(cliente.cortes >= 9 && cliente.cortes < 11)
+  if (cliente.cortes === 9 ){
+    cliente.cortesGratis = true
+
+    return res.json({mensagem: 'Parabéns! Cliente ganhou um corte grátis!'})
+  }
   res.json(cliente)
+
+
 })
