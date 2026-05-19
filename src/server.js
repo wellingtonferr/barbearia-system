@@ -34,13 +34,13 @@ app.put('/clientes/:nome', (req, res)=>{
   const {nome} = req.params
   const cliente = clientes .find(cliente => cliente.nome === nome)
 
-  if (!clientes){
+  if (!cliente){
     return res.status(400).json({erro:'cliente não encontrado'})
   }
 
   if(cliente.cortesGratis){
     cliente.cortes = 0
-    cortesGratis = 0
+    cliente.cortesGratis = false
 
     return res.json({mensagem : 'Corte grátis utilizado!'})
   }
